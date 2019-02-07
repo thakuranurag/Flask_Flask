@@ -34,19 +34,18 @@
 	<center>
     <div class="card col m12 l2"></div>
     	<div class="col s12 m5 l4 container" style="margin-left:150px;margin-top: 70px">
-            <form style="padding: 20px;" method = "POST" style="margin-top: 0px">
-             <center><a class="" href="/"><img src="/media/pic/admin.png" style="height: 100px;z-index:10;
-              position: relative; top: 12px"></a></center> 
+            <form action="/login" style="padding: 20px;" method = "POST" style="margin-top: 0px">
+       <!--      <center><img src="/media/pic/admin.png" style="height: 100px;z-index:10;position: relative; top: 12px"></center>    -->
               <div class="card" style="padding: 20px; top: -40px;z-index: 0">
                 <div class="row" style="position: relative;top: 30px">
                     <div class="input-field col s12">
-                      <input id="username" type="text" class="validate" name="login_mobile" required>
-                      <label for="username">Username</label>
+                      <input id="mobile" name="mobile" type="text" class="validate" name="login_mobile" required>
+                      <label for="mobile">Mobile</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="password" type="password" class="validate" name="login_password" required>
+                      <input id="password" name= "password" type="password" class="validate" name="login_password" required>
                       <label for="password">Password</label>
                     </div>
                 </div>
