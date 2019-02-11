@@ -77,9 +77,15 @@ def register():
         else:
             msg = "failed to add user"
         session['mobile'] = request.form['mobile']
-        mob=request.form['mobile']
-        random_number = random.randint(1000, 9999)
-        dbHandler.insertotp(request,random_number,mob)
+        otp=random.randint(1000, 9999)
+        session['otp']=otp
+        dbHandler.insertotp(request)
+        msg = mail.send_message(
+        'Send Mail tutorial!',
+        sender='connectevery1@gmail.com',
+        recipients=['anuragt0007@gmail.com'],
+        body="Your one time password for this anonymous website is " + str(otp) + " will be valid for lifetime..."
+    )
 
 	return redirect(url_for('otp_verify'))
     
@@ -95,10 +101,16 @@ def otp_verify():
         print("inside GET Method")
         return render_template('otp.html')
     if request.method=='POST':
+        print("qweret")
         otp=request.form['otp']
-        if 'mobile' in session:
-            mobile=session['mobile']
-        otp_from_db = dbHandler.getOtp(request,mobile)
+        otp_from_db = dbHandler.otp_verification(request)
+        print(">>>>>>>>>>>>>>>>>>>>>> " + str(otp))
+        print(">>>>>>>>>>>>>>>>>>>>>> " + str(otp_from_db))
+
+        if int(otp_from_db)==int(otp):
+            return redirect(url_for('home'))
+        else:
+            return render_template("otp.html", message="OTP did not match")
 
 
 ######################## logout #################################################
@@ -129,8 +141,8 @@ def home():
     		print rows
         	return render_template("home.html", data = rows)
 
-    else:
-    	return redirect(url_for('login'))
+        else:
+    	   return redirect(url_for('login'))
 
 
 

@@ -29,38 +29,37 @@
 <div class="navbar-fixed">    
   <nav>
       <div class="nav-wrapper" style="background:#11989E"> 
-          
-        
+              
       </div>
   </nav>
 </div>
 </head>
 
-  <ul id="slide-out" class="sidenav" style="position: fixed;">
-    <li><div class="user-view">
-      <div class="background">
-        <img src="images/office.jpg">
-      </div>
-      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-      <a href="#name"><span class="white-text name">John Doe</span></a>
-      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-    </div></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-  </ul>
-  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
       
 
 <body>
 {%block content%}
+<div id="container" style="width:100%;">  
+<div id="left" style="float:left; width:20%;">  
 
-<div>
+<ul id="slide-out" class="side-nav fixed">
+        <li><div class="userView">
+            <img class="background" src="http://placehold.it/350x150">
+            <a href="#!user"><img class="circle" src="http://placehold.it/350x300"></a>
+            <a href="#!name"><span class="white-text name">John Doe</span></a>
+            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div></li>
+        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+        <li><a href="#!">Second Link</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
 
-    
-         
+
+</div>
+<div id="right" style="float:right; width:80%;"> 
          {% for row in data %}  
 
         
@@ -79,8 +78,7 @@
 
          {% endfor %}
 </div>
-
-  <br><a href = "/">Go back to home page</a>
+</div>
   
 {% endblock %}
 

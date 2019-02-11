@@ -4,6 +4,7 @@ from passlib.hash import sha256_crypt
 from flask import jsonify
 import os
 import json
+import random
 
 def insertUser(request):
     con = sql.connect("Flask_DB.db")
@@ -39,17 +40,16 @@ def authenticate(request):
        return False
 
 
-def otp_verify(request):
+def otp_verification(request):
     con = sql.connect("Flask_DB.db")
+    mobile=session['mobile']
     cur = con.cursor()
-    cur.execute("SELECT otp FROM otpdata where mobile='9826122862';")
+    cur.execute("SELECT otp FROM otp_data where mobile= "+ mobile +" ")
     rows = cur.fetchall()
-    if rows[0]==(request.form['otp']):
-        con.close()
-        return "success"
-    else:
-        con.close()
-        return "failure"
+    otp=0
+    for r in rows:
+        otp=r[0]
+    return otp
 	
 
 def get_images():
@@ -70,9 +70,10 @@ def get_images():
     return response_array
 
 
-def insertotp(request,otp,mobile):
+def insertotp(request):
     con = sql.connect("Flask_DB.db")
-    print("yaha tak chal raha hai " + mobile + "  >>>  "+otp )
+    mobile=session['mobile']
+    otp = session['otp']
     sqlQuery = "select otp from otp_data where (mobile ='" + mobile + "')"
     cur = con.cursor()
     cur.execute(sqlQuery)
@@ -80,25 +81,22 @@ def insertotp(request,otp,mobile):
     
     if not row:
         cur.execute("INSERT INTO otp_data (mobile,otp) VALUES (?,?)", (mobile,otp))
-        con.commit()
         print "otp added successfully"
-       
+    else:
+        cur.execute("UPDATE otp_data SET otp= "+str(otp)+ " where mobile= "+ str(mobile) +" ")
+    
+    con.commit()   
     con.close()
     return not row
 
 
-def getOtp(request,mobile):
+def getOtp(request):
+    mobile=session['mobile']
     con = sql.connect("Flask_DB.db")
     sqlQuery = "select otp from otp_data where (mobile ='" + mobile + "')"
     cur = con.cursor()
     cur.execute(sqlQuery)
     row = cur.fetchone()
-    
-    if not row:
-        cur.execute("INSERT INTO otp_data (mobile,otp) VALUES (?,?)", (mobile,otp))
-        con.commit()
-        print "otp added successfully"
-       
     con.close()
     return not row
 
