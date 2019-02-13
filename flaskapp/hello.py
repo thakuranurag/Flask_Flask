@@ -7,6 +7,7 @@ from flask import session
 from flask import jsonify
 from flask_mail import Mail, Message
 import json,random
+from datetime import datetime
 
 app = Flask(__name__ )
 app.secret_key = 'MKhJHJH798798kjhkjhkjGHh'
@@ -51,26 +52,28 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-	print("something")
-	if 'mobile' in session:
-		return render_template("result.html", message=session['mobile'] +" has already logged in,  first logout!!!")
-	elif request.method == 'POST':
-		if dbHandler.authenticate(request):
-			session['mobile'] = request.form['mobile']
-			msg = "successful login"
-			return redirect(url_for('home'))
+    if 'mobile' in session:
+        return redirect(url_for('home'))
 
-		else:
-			msg ="login failed"
-			return render_template("result.html", message=msg)
+    elif request.method == 'POST':
+        if dbHandler.authenticate(request):
+            session['mobile'] = request.form['mobile']
+            msg = "successful login"
+            return redirect(url_for('home'))
+        else:
+            msg ="login failed"
+            return render_template("result.html", message=msg)
 
-	return render_template('login.html')
+    return render_template('login.html')
 
 
 
 ######################### register ################################################
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    if 'mobile' in session:
+        return redirect(url_for('home'))
+
     if request.method=='POST':
         if dbHandler.insertUser(request):
             msg = "success in adding user"
@@ -144,6 +147,23 @@ def home():
         else:
     	   return redirect(url_for('login'))
 
+######################## logout #################################################
+@app.route('/tweet', methods=['POST', 'GET'])
+def tweet():
+    if request.method=='GET':
+        print("inside GET Method")
+        rows = dbHandler.get_tweet()
+        print rows
+        return render_template("tweet.html", data = rows)
+
+    if request.method=='POST':
+        mobile=session['mobile']
+        tweet=request.form['tweet']
+        date= datetime.date(datetime.now())
+
+        if dbHandler.insertTweet(request):
+            print("ho gaya")
+            return redirect(url_for('tweet'))
 
 
 ######################## dummy #################################################

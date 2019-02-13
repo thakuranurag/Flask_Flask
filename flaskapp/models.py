@@ -5,6 +5,7 @@ from flask import jsonify
 import os
 import json
 import random
+from datetime import datetime
 
 def insertUser(request):
     con = sql.connect("Flask_DB.db")
@@ -99,6 +100,82 @@ def getOtp(request):
     row = cur.fetchone()
     con.close()
     return not row
+
+
+def insertTweet(request):
+    con = sql.connect("Flask_DB.db")
+    mobile=session['mobile']
+    tweet = request.form['tweet']
+    added_on=datetime.date(datetime.now())
+
+    sl = getSl(mobile)
+    sl=sl+1
+
+    print(">>>> "+ str(mobile) +"  >> " + str(tweet) +" >> "+str(added_on))
+    cur = con.cursor()
+    cur.execute("INSERT INTO tweet_data (mobile,sl,tweet,added_on) VALUES (?,?,?,?)", (mobile,sl,tweet,added_on))
+    print "tweet added successfully"
+    
+    con.commit()   
+    con.close()
+    return "success"
+
+
+def get_tweet():
+    print("here madafaka")
+    mobile=session['mobile']
+    response_array=[]
+    con = sql.connect("Flask_DB.db")
+        # Uncomment line below if you want output in dictionary format
+    #con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT tweet FROM tweet_data where mobile = "+ mobile+" ")
+    rows = cur.fetchall()
+    for r in rows:
+        response_array.append(str(r[0]))
+
+    con.close()
+    return response_array
+
+
+def getSl(mobile):
+    mobile=mobile
+    con=sql.connect("Flask_DB.db")
+    cur=con.cursor()
+    cur.execute("SELECT MAX(sl) FROM tweet_data WHERE mobile= "+ mobile)
+    row= cur.fetchone()
+
+    print(type(row))
+    print(len(row))
+    print(row)
+
+    if not all(row):
+        sl=0
+    else:
+        sl=row[0]
+
+    con.close()
+    print("serial is " + str(sl))
+    return sl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

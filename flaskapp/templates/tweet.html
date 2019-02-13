@@ -52,28 +52,48 @@
 
 </div>
 <div id="right" style="float:right; width:80%;"> 
-         {% for row in data %}  
+
+
+
+
+ <div class="row" >
+  <center>
+    <div class="card col m12 l2"></div>
+      <div class="col s12 m5 l4 container" style="margin-left:150px;margin-top: 70px">
+            <form action="/tweet" style="padding: 20px;" method = "POST" style="margin-top: 0px">
+       <!--      <center><img src="/media/pic/admin.png" style="height: 100px;z-index:10;position: relative; top: 12px"></center>    -->
+              <div class="card" style="padding-left:10px;padding-right: 10px; top: -40px;z-index: 0;width: 500px;">
+                <div class="row" style="position: relative;top: 30px">
+                    <div class="input-field col s12">
+                     <textarea name="tweet" id="tweet" rows="8" cols="50" style="height: 7rem;"></textarea>
+                    </div>
+                </div>
+              <button class="btn cyan darken-3 " type= "submit" name="submit" style="margin: 0px;padding: 5px;height: 50px;width: 100%;margin-bottom: 10px ">Post</button>
+              </div>
+            </form>      
+        </div>
+        </center>
+    </div>
+
+
+
+{% for row in data %}  
 
         
                 <div class="row">
                     <center>
-                      <div class="card"   style="height: 350px; width: 400;"">
-                        <div class="card-image">
-                          <img src="{{url_for('static', filename= row) }}">
-                        </div>
-                        <div class="card-content">
-                          <p>Fucking awesome trip</p>
-                        </div>
+                      <div class="card"   style="height: 180; width: 400;"">
+                          {{ row }}
                       </div>
                       </center>
                   </div>
 
          {% endfor %}
-</div>
-</div>
   
 {% endblock %}
+</div>
 
+</div>
 
 
 </body>
