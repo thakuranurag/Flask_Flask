@@ -55,11 +55,10 @@
 
  <div class="row" >
   <center>
-    <div class="card col m12 l2"></div>
       <div class="col s12 m5 l4 container" style="margin-left:150px;margin-top: 70px">
             <form action="/tweet" style="padding: 20px;" method = "POST" style="margin-top: 0px">
        <!--      <center><img src="/media/pic/admin.png" style="height: 100px;z-index:10;position: relative; top: 12px"></center>    -->
-              <div class="card" style="padding-left:10px;padding-right: 10px; top: -40px;z-index: 0;width: 500px;">
+              <div class="card" style="padding-left:10px;margin-left: 250px;padding-right: 10px; top: -40px;z-index: 0;width: 500px;">
                 <div class="row" style="position: relative;top: 30px">
                     <div class="input-field col s12">
                      <textarea name="tweet" id="tweet" rows="8" cols="50" style="height: 7rem;"></textarea>
@@ -79,8 +78,13 @@
         
                 <div class="row">
                     <center>
-                      <div class="card"   style="height: 180; width: 400;"">
-                          {{ row }}
+                      <div class="card" style="margin-left: -80px;height: 180; width: 400;">
+                         <div style="float: top;height: 70%"><p style="padding-top: 25px;">{{ row }}</p> 
+                         </div>
+                         <div style="float: bottom;height: 30%;background-color: #f5f6f7;">
+                           <div style="float: left;height: 70%;"></div>
+                           <div style="float: right;height: 30%;"><a class="btn-floating btn-large waves-effect waves-light  #35838f" style="height: 40px;width: 40px;top:8px"><i class="material-icons" style="line-height: 40px">thumb_up</i></a></div>
+                         </div>
                       </div>
                       </center>
                   </div>
