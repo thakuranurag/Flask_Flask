@@ -170,7 +170,7 @@ def tweet():
 @app.route('/dummy', methods=['POST', 'GET'])
 def dummy():
     if request.method=='GET':
-        return render_template("materialcss.html", message="")
+        return render_template("dummy.html", message="")
 
 
 
