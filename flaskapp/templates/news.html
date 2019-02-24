@@ -30,13 +30,13 @@
   <nav>
       <div class="nav-wrapper" style="background:#11989E"> 
       <center>
-              <div class="col s12">
+               <div class="col s12">
         <a href="/tweet" class="breadcrumb">Tweets</a>
         <a href="/home" class="breadcrumb">Images</a>
         <a href="/headlines" class="breadcrumb">Headlines</a>
       </div>
       </center>
-      </div>
+
   </nav>
 </div>
 </head>
@@ -48,26 +48,27 @@
 {%block content%}
 <div id="container" style="width:100%;">  
 
-         {% for row in data %}  
+
+
+
+{% for row in data %}  
 
         
                 <div class="row">
                     <center>
-                      <div class="card"   style="height: 350px; width: 400;"">
-                        <div class="card-image">
-                          <img src="{{url_for('static', filename= row) }}">
-                        </div>
-                        <div class="card-content">
-                          <p>Fucking awesome trip</p>
-                        </div>
+                      <div class="card" style="margin-left: -80px;height: inherit; width: 900;">
+                         <div><p style="padding-top: 25px;">{{ row.title }} <br><br>{{ row.content}}</p> 
+                         </div>
+                         
                       </div>
                       </center>
                   </div>
 
          {% endfor %}
-</div>
   
 {% endblock %}
+</div>
+
 
 
 

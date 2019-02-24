@@ -8,6 +8,7 @@ from flask import jsonify
 from flask_mail import Mail, Message
 import json,random
 from datetime import datetime
+import requests
 
 app = Flask(__name__ )
 app.secret_key = 'MKhJHJH798798kjhkjhkjGHh'
@@ -172,5 +173,21 @@ def dummy():
     if request.method=='GET':
         return render_template("dummy.html", message="")
 
+
+
+######################## NEWS #################################################
+@app.route('/headlines/', methods=['POST', 'GET'])
+def headlines():
+    if request.method=='GET':
+        url = ('https://newsapi.org/v2/top-headlines?'
+       'country=us&'
+       'apiKey=82d1bec56bff4908b7eae0d6f932d3d9')
+        response = requests.get(url)
+        print(type(response))
+        news_article=[]
+        news_article = response.json()['articles']
+        print(type(news_article))
+
+        return render_template("news.html", data=news_article)
 
 

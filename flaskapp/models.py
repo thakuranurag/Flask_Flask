@@ -129,10 +129,15 @@ def get_tweet():
         # Uncomment line below if you want output in dictionary format
     #con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT tweet FROM tweet_data where mobile = "+ mobile+" ")
+    cur.execute("SELECT tweet,likes,added_on FROM tweet_data where mobile = "+ mobile+" ")
     rows = cur.fetchall()
     for r in rows:
-        response_array.append(str(r[0]))
+        tweets = {}
+        tweets['tweet']=str(r[0])
+        tweets['likes']=str(r[1])
+        tweets['added_on']=str(r[2])
+
+        response_array.append(tweets)
 
     con.close()
     return response_array
