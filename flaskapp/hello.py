@@ -30,6 +30,10 @@ app.config.update(dict(
 
 mail = Mail(app)
 
+@app.route('/')
+def some():
+    return "gegsgs"
+
 @app.route('/send-mail/')
 def send_mail():
     msg = mail.send_message(
