@@ -14,7 +14,9 @@ import os
 
 app = Flask(__name__ )
 app.secret_key = 'MKhJHJH798798kjhkjhkjGHh'
-    
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port='8080')
 
 
 app.config.update(dict(
@@ -28,6 +30,10 @@ app.config.update(dict(
 ))
 
 mail = Mail(app)
+
+@app.route('/')
+def some():
+    return "gegsgs"
 
 @app.route('/send-mail/')
 def send_mail():
