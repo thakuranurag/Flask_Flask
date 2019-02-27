@@ -10,6 +10,7 @@ import json,random
 from datetime import datetime
 import requests
 import os
+import unirest
 
 
 app = Flask(__name__ )
@@ -198,4 +199,16 @@ def headlines():
 
         return render_template("news.html", data=news_article)
 
+########################   PETROL PRICES #################################################
+@app.route('/petrolprices/', methods=['POST', 'GET'])
+def petrolprices():
+    if request.method=='GET':
+        response = unirest.post("https://fuelprice.p.rapidapi.com",
+            headers={
+            "X-RapidAPI-Key": "a5a37101b0msh05482ff14039b8bp1da28ejsn2a6dc4c6cfbe",
+            "Content-Type": "application/x-www-form-urlencoded"})
+        print(type(response))
+        print(response)
+
+        return render_template("petrolprices.html",data="asd")
 
