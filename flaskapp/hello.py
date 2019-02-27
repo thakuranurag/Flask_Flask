@@ -13,14 +13,8 @@ import os
 
 
 app = Flask(__name__ )
-
-app.run(
-    host=os.getenv('LISTEN', '0.0.0.0'),
-    port=int(os.getenv('PORT', '8080'))
-)
-
 app.secret_key = 'MKhJHJH798798kjhkjhkjGHh'
-
+    
 
 
 app.config.update(dict(
